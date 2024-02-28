@@ -6,7 +6,7 @@ meta:
 <template>
   <div>
     <h1>Basketball Teams</h1>
-    <table>
+    <table v-if="teams.length">
       <thead>
         <th>Name</th>
         <th>City</th>
@@ -18,6 +18,7 @@ meta:
         </tr>
       </tbody>
     </table>
+    <p v-else class="loading-message">Loading teams...</p>
   </div>
 </template>
 
@@ -29,9 +30,6 @@ export default {
   name: 'Teams',
   setup() {
     const teamsStore = useTeamsStore()
-
-    // Fetch teams when component mounts
-    teamsStore.fetchTeams()
     onMounted(() => {
       teamsStore.fetchTeams()
     })
@@ -47,17 +45,16 @@ table {
   margin-left: auto;
   margin-right: auto;
   width: 80%;
-  border-collapse: collapse; /* Make table borders collapse into single lines */
 }
 
 th,
 td {
   border: 1px solid #ddd;
   padding: 10px;
-  text-align: left; /* Or 'center' if you want centered alignment */
+  text-align: left;
 }
 
 th {
-  background-color: #f2f2f2; /* Light gray background for headers */
+  background-color: #f2f2f2;
 }
 </style>
