@@ -35,5 +35,19 @@ export const usePlayersStore = defineStore('players', {
         console.error('Error fetching players:', error)
       }
     },
+    async updatePlayerName(id: number, name: string) {
+      try {
+        const supabaseClient = getSupabaseClient()
+        const { data, error } = await supabaseClient.from('player').update({ full_name: name }).eq('id', id)
+        if (error) {
+          throw error
+        }
+        console.log(data)
+        const playerIndex = this.players.findIndex((player) => player.id === id)
+        this.players[playerIndex].full_name = name
+      } catch (error) {
+        console.error('Error updating player name:', error)
+      }
+    },
   },
 })
