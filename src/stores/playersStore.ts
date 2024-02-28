@@ -8,9 +8,11 @@ export const usePlayersStore = defineStore('players', {
   }),
   actions: {
     async fetchPlayers() {
+      if (this.players.length) {
+        return
+      }
       try {
         const supabaseClient = getSupabaseClient()
-
         const { data: players, error } = await supabaseClient.from('player').select('*')
         const { data: teams, error: errorTeams } = await supabaseClient.from('team').select('*')
         if (error || errorTeams) {
