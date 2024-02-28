@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
-import { createClient } from '@supabase/supabase-js'
 import { Player, Team } from '@/types'
+import { getSupabaseClient } from '@/supabase/supabase'
 
 export const usePlayersStore = defineStore('players', {
   state: () => ({
@@ -9,18 +9,15 @@ export const usePlayersStore = defineStore('players', {
   actions: {
     async fetchPlayers() {
       try {
-        const supabaseUrl = 'https://yeurtxzjsxhnjuzrzgzh.supabase.co'
-        const supabaseKey =
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlldXJ0eHpqc3hobmp1enJ6Z3poIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkwNzM0NTgsImV4cCI6MjAyNDY0OTQ1OH0.9WJpIDuAlFEOf-FLtJ7CS1NX9BEnooZblcopVIj7_jU'
-        const supabase = createClient(supabaseUrl, supabaseKey)
+        const supabaseClient = getSupabaseClient()
 
-        const { data: players, error } = await supabase.from('player').select('*')
-        const { data: teams, error: errorTeams } = await supabase.from('team').select('*')
+        const { data: players, error } = await supabaseClient.from('player').select('*')
+        const { data: teams, error: errorTeams } = await supabaseClient.from('team').select('*')
         if (error || errorTeams) {
           throw error
         }
 
-        const newPlayers = []
+        const updatedPlayers = []
 
         if (players && teams) {
           for (const player of players) {
@@ -28,11 +25,10 @@ export const usePlayersStore = defineStore('players', {
               ...player,
               team: teams?.find((team: Team) => team.id === player.team_id),
             }
-            newPlayers.push(tempPlayer)
+            updatedPlayers.push(tempPlayer)
           }
         }
-        console.log('players:', newPlayers)
-        this.players.push(...newPlayers)
+        this.players.push(...updatedPlayers)
       } catch (error) {
         console.error('Error fetching players:', error)
       }
