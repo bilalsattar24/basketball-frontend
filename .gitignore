@@ -5,3 +5,5 @@ dist-ssr
 *.local
 # Generated API Client
 /src/api-client
+.vscode/settings.json
+```

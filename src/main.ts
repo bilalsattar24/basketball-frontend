@@ -1,6 +1,7 @@
 import '@/assets/scss/app.scss'
 import { createApp } from 'vue'
 import { createAuth } from './auth'
+import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 import axiosInstance from './api/axios'
@@ -22,4 +23,5 @@ app.use(router)
 app.use(auth)
 app.use(i18n)
 app.provide('enable-route-transitions', true)
+app.use(createPinia())
 app.mount('#app')

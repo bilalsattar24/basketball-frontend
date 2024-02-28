@@ -16,14 +16,16 @@ const { t, locale, availableLocales } = useI18n()
 </script>
 
 <template>
-  <HelloWorld title="Hi developer!" msg="This is the index page!" />
+  <HelloWorld title="Hi developer!" msg="Basketball Home Page" />
 
   <p>Click on the links to test the route transitions:</p>
-  <router-link :to="{ name: 'about' }">To About</router-link>
+  <router-link :to="{ name: 'about' }">To Player</router-link>
   <br />
   <router-link :to="{ name: 'home' }">To Home</router-link>
   <br />
   <router-link :to="{ name: 'login' }">To Login</router-link>
+  <br />
+  <router-link :to="{ name: 'players' }">To Players</router-link>
 
   <p class="mb-0 mt-4">[Default Layout]</p>
   <p>
