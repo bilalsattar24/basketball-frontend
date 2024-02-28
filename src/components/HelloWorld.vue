@@ -6,7 +6,7 @@ const props = defineProps<{ title: string; msg?: string }>()
   <img
     alt="Vue logo"
     src="https://www.rallybehindyou.com/assets/rally-behind-you-logo.e829becf.svg"
-    style="height: 200px"
+    style="height: 200px; margin-top: 25px"
   />
 
   <h1>{{ title }}</h1>
