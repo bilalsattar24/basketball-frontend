@@ -16,7 +16,16 @@ npm run dev
 
 Then Navigate to localhost:3000
 
-You will see a link to view teams and players on the home page.
+You will see a link to view teams and players on the home page. Or you can navigate to the following urls
+
+```
+localhost:3000/teams
+```
+
+```
+localhost:3000/players
+
+```
 
 I added the ability to edit a player's name. That edit can be triggered by simply clicking the name of the team. This will show a form to edit the player's name.
 
@@ -25,3 +34,7 @@ The data is actually stored in a supabase database. I decided to use a cloud dep
 I was able to also integrate Pinia for the data store. This made it really easy to retrieve the relevant data from the database and display it in the UI.
 
 Please do not hesitate to reach out if you have any questions or concerns. I am happy to help in any way I can. I'm looking forward to hearing from you!
+
+```
+
+```
