@@ -8,6 +8,9 @@ export const useTeamsStore = defineStore('teams', {
   }),
   actions: {
     async fetchTeams() {
+      if (this.teams.length) {
+        return
+      }
       try {
         const supabaseClient = getSupabaseClient()
         const { data: teams, error } = await supabaseClient.from('team').select('*')
