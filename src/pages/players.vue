@@ -6,51 +6,62 @@ meta:
 <template>
   <div>
     <h1>Players</h1>
-    <ul>
-      <Player v-for="player in players" :key="player.id" :player="player" />
-    </ul>
+    <table>
+      <thead>
+        <th>Name</th>
+        <th>Team</th>
+      </thead>
+      <tbody>
+        <tr v-for="player in players" :key="player.id">
+          <td>{{ player.full_name }}</td>
+          <td>{{ player.team.name }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
 <script lang="ts">
-import Player from '@/components/Player.vue'
-import { Player as PlayerType } from '@/types'
-import { createClient } from '@supabase/supabase-js'
-
-let supabase: any = null
+import { usePlayersStore } from '@/stores/playersStore'
+import { onMounted } from 'vue'
 
 export default {
-  components: {
-    Player,
-  },
-  data() {
-    return {
-      players: [] as PlayerType[],
-    }
-  },
-  mounted() {
-    const supabaseUrl = 'http://127.0.0.1:54321'
-    const supabaseKey =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0'
-    supabase = createClient(supabaseUrl, supabaseKey)
-    this.fetchPlayers()
-  },
-  methods: {
-    async fetchPlayers() {
+  name: 'Players',
+  setup() {
+    const playersStore = usePlayersStore()
+    onMounted(async () => {
       try {
-        let { data: players, error } = await supabase.from('player').select('*')
-
-        if (error) throw error
-        console.log('players: ', players)
-        this.players = players
+        await playersStore.fetchPlayers()
       } catch (error) {
-        console.error('Error fetching players:', error)
+        console.error('Error fetching teams:', error)
       }
-    },
+    })
+    return {
+      players: playersStore.players,
+    }
   },
 }
 </script>
 
 <style scoped>
-/* Add your custom styles here */
+h1 {
+  margin-top: 20px;
+}
+table {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  width: 80%;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
 </style>
