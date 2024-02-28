@@ -22,4 +22,6 @@ I added the ability to edit a player's name. That edit can be triggered by simpl
 
 The data is actually stored in a supabase database. I decided to use a cloud deployed version of the supabase backend so that it would be easy for you run the project without having to set up a local database and seeding the data. The credentials for the database are hard coded in the code base.
 
+I was able to also integrate Pinia for the data store. This made it really easy to retrieve the relevant data from the database and display it in the UI.
+
 Please do not hesitate to reach out if you have any questions or concerns. I am happy to help in any way I can. I'm looking forward to hearing from you!
