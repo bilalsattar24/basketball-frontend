@@ -16,34 +16,10 @@ const { t, locale, availableLocales } = useI18n()
 </script>
 
 <template>
-  <HelloWorld title="Hi developer!" msg="Basketball Home Page" />
+  <HelloWorld title="Basketball Coding Challenge" />
 
-  <p>Click on the links to test the route transitions:</p>
-  <router-link :to="{ name: 'about' }">To Player</router-link>
+  <p>Click on the links to See Players or Teams</p>
+  <router-link :to="{ name: 'players' }">Players</router-link>
   <br />
-  <router-link :to="{ name: 'home' }">To Home</router-link>
-  <br />
-  <router-link :to="{ name: 'login' }">To Login</router-link>
-  <br />
-  <router-link :to="{ name: 'players' }">To Players</router-link>
-
-  <p class="mb-0 mt-4">[Default Layout]</p>
-  <p>
-    <span v-if="auth.isAuthenticated">
-      <i18n-t keypath="Authenticated as {user}">
-        <template #user>
-          <b class="me-2">{{ auth.user.email }}</b>
-        </template>
-      </i18n-t>
-      <button @click="auth.logout">Logout</button>
-    </span>
-    <b v-else>{{ t('Not Authenticated') }}</b>
-  </p>
-
-  <p>
-    {{ t('Change Language') }}:
-    <select v-model="locale">
-      <option v-for="code in availableLocales" :key="code" :value="code">{{ code }}</option>
-    </select>
-  </p>
+  <router-link :to="{ name: 'teams' }">Teams</router-link>
 </template>
