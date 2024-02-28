@@ -9,9 +9,9 @@ export const useTeamsStore = defineStore('teams', {
   actions: {
     async fetchTeams() {
       try {
-        const supabaseUrl = 'http://127.0.0.1:54321'
+        const supabaseUrl = 'https://yeurtxzjsxhnjuzrzgzh.supabase.co'
         const supabaseKey =
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0'
+          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlldXJ0eHpqc3hobmp1enJ6Z3poIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDkwNzM0NTgsImV4cCI6MjAyNDY0OTQ1OH0.9WJpIDuAlFEOf-FLtJ7CS1NX9BEnooZblcopVIj7_jU'
         const supabase = createClient(supabaseUrl, supabaseKey)
 
         const { data: teams, error } = await supabase.from('team').select('*')
