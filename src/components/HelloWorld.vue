@@ -1,37 +1,16 @@
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue'
-
-const props = defineProps<{ title: string; msg: string; likes?: number }>()
-
-const count = ref(props.likes || 0)
-
-watchEffect(() => {
-  props.likes && (count.value = props.likes)
-})
+const props = defineProps<{ title: string; msg?: string }>()
 </script>
 
 <template>
-  <img alt="Vue logo" src="@/assets/logo.png" style="height: 200px" />
+  <img
+    alt="Vue logo"
+    src="https://www.rallybehindyou.com/assets/rally-behind-you-logo.e829becf.svg"
+    style="height: 200px"
+  />
 
   <h1>{{ title }}</h1>
   <p>{{ msg }}</p>
-
-  <p>
-    <a href="https://helixsoft.com.co" target="_blank">Helix Software</a>
-    |
-    <a href="https://www.instagram.com/helixsoft/" target="_blank">@helixsoft</a>
-  </p>
-
-  <p>
-    <button class="btn btn-primary" @click="count++">
-      <i-mdi-thumb-up />
-      {{
-        $tc('This template has no likes | This template has one like | This template has {likes} likes', count, {
-          likes: count,
-        })
-      }}
-    </button>
-  </p>
 </template>
 
 <style scoped>
