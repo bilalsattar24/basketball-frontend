@@ -18,7 +18,7 @@ meta:
         </tr>
       </tbody>
     </table>
-    <p v-else class="loading-message">Loading teams...</p>
+    <p v-else>Loading teams...</p>
   </div>
 </template>
 
@@ -30,20 +30,28 @@ export default {
   name: 'Teams',
   setup() {
     const teamsStore = useTeamsStore()
-    onMounted(() => {
-      teamsStore.fetchTeams()
+    onMounted(async () => {
+      try {
+        await teamsStore.fetchTeams()
+      } catch (error) {
+        console.error('Error fetching teams:', error)
+      }
     })
     return {
-      teams: teamsStore.teams, // Access teams from the store
+      teams: teamsStore.teams,
     }
   },
 }
 </script>
 
 <style scoped>
+h1 {
+  margin-top: 20px;
+}
 table {
   margin-left: auto;
   margin-right: auto;
+  margin-top: 50px;
   width: 80%;
 }
 

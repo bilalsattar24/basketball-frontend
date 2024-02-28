@@ -15,9 +15,9 @@ export const useTeamsStore = defineStore('teams', {
         const supabase = createClient(supabaseUrl, supabaseKey)
 
         const { data: teams, error } = await supabase.from('team').select('*')
-
+        console.log('teams:', teams)
         if (error) throw error
-        this.teams = teams as Team[]
+        this.teams.push(...teams)
       } catch (error) {
         console.error('Error fetching teams:', error)
       }
